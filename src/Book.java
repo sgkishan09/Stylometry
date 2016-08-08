@@ -5,12 +5,11 @@ public class Book {
 	String author;
 	String name;
 	ArrayList<String> lines;
-	ArrayList<String> words;
-
+	
 	public Book() {
 		author = "";
 		name = "";
-		words = new ArrayList<>();
+		lines = new ArrayList<>();
 	}
 
 	public Book(String author, String name, String path) throws Exception {
@@ -18,5 +17,5 @@ public class Book {
 		this.name = name;
 		this.lines = Util.readFile(path);
 	}
-
+	
 }
