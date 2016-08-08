@@ -14,10 +14,14 @@ public class Driver {
 			author.addBook(new Book("Hamlet", "Shakespeare", "Hamlet.txt"));
 			author.addBook(new Book("JuliusCaesar", "Shakespeare", "Julius Caesar.txt"));
 			author.addBook(new Book("Macbeth", "Shakespeare", "Macbeth.txt"));
-			System.out.println(author.hasWritten(new Book("War And Peace", "Tolstoy", "WarAndPeace.txt")));
+			author.generateCorpusList();
+			author.generateLetterList();
+			System.out.println(author.wordCorpus);
+			System.out.println(author.letterCorpus);
+/*			System.out.println(author.hasWritten(new Book("War And Peace", "Tolstoy", "WarAndPeace.txt")));
 			System.out.println(author.hasWritten(new Book("A Child's Dream of a Star", "Charles Dickens", "ChildsDream.txt")));
 			System.out.println(author.hasWritten(new Book("Macbeth", "Shakespeare", "Macbeth.txt")));
-			
+*/			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
