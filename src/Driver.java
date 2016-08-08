@@ -6,11 +6,12 @@ public class Driver {
 	public static void main(String[] args) {
 
 		try {
-			Author author = new Author("Shakespeare", PunctuationMetric.class);
+			Author author = new Author("Shakespeare", SentenceMetric.class);
 			author.addBook(new Book("Hamlet", "Shakespeare", "Hamlet.txt"));
 			author.addBook(new Book("JuliusCaesar", "Shakespeare", "Julius Caesar.txt"));
 			author.addBook(new Book("Macbeth", "Shakespeare", "Macbeth.txt"));
-			System.out.println(author.isValid(new Book("War And Peace", "Tolstoy", "WarAndPeace.txt"), 0.7));
+			author.addBook(new Book("War And Peace", "Tolstoy", "WarAndPeace.txt"));
+			System.out.println(author.isValid(new Book("War And Peace", "Tolstoy", "WarAndPeace.txt")));
 			author.printAll();
 		} catch (Exception e) {
 			e.printStackTrace();

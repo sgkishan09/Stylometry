@@ -1,6 +1,5 @@
 import java.lang.reflect.InvocationTargetException;
-import java.util.*;
-
+import java.util.*; 
 public class Author {
 	String name;
 	ArrayList<Book> books;
@@ -21,7 +20,7 @@ public class Author {
 		books.add(book);
 	}
 
-	public boolean isValid(Book check, double threshold) throws Exception {
+	public boolean isValid(Book check) throws Exception {
 		Metric metric = getMetricInstance(check);
 		int count = 0;
 		for (Book book : books) {
@@ -41,9 +40,13 @@ public class Author {
 			Metric metric = getMetricInstance(book);
 			System.out.println(book);
 			for (int j = 0; j < books.size(); j++) {
-				Book book2 = books.get(j);
-				System.out.println(book.name + "\t" + book2.name);
-				System.out.println(String.format("%.4f", metric.compare(getMetricInstance(book2))));
+				if (j != i) {
+					Book book2 = books.get(j);
+					System.out.println(book.name + "\t" + book2.name);
+					System.out.println(String.format("%.4f", metric.compare(getMetricInstance(book2))));
+					System.out.println("--------------------");
+
+				}
 			}
 		}
 	}
