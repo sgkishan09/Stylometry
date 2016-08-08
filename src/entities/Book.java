@@ -46,7 +46,6 @@ public class Book {
 
 	private void readFile(String path) throws Exception {
 		this.content = new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
-		content = content.replaceAll("\n", "");
 	}
 
 	private void extractParagraph() {
