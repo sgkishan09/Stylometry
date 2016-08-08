@@ -18,6 +18,7 @@ public class Book {
 	ArrayList<String> paragraph;
 	ArrayList<String> tokens;
 	ArrayList<String> sentences;
+	ArrayList<String> words;
 
 	public Book() {
 		author = "";
@@ -31,6 +32,17 @@ public class Book {
 		readFile(path);
 		extractSentences();
 		extractTokens();
+		extractWords();
+	}
+
+	private void extractWords() {
+		// TODO Auto-generated method stub
+		words = new ArrayList<String>();
+		for (String token : tokens) {
+			if (token.matches("[a-z].*")) {
+				words.add(token);
+			}
+		}
 	}
 
 	private void readFile(String path) throws Exception {
