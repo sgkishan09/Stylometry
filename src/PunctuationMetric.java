@@ -28,4 +28,3 @@ public class PunctuationMetric implements Metric {
               return "Punctuation Density: " + punctuationDensity;
        }
 }
-
