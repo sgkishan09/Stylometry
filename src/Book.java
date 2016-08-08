@@ -1,9 +1,12 @@
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import opennlp.tools.sentdetect.SentenceDetectorME;
 import opennlp.tools.sentdetect.SentenceModel;
@@ -18,6 +21,7 @@ public class Book {
 	ArrayList<String> paragraph;
 	ArrayList<String> tokens;
 	ArrayList<String> sentences;
+	ArrayList<String> words;
 
 	public Book() {
 		author = "";
@@ -29,12 +33,27 @@ public class Book {
 		this.author = author;
 		this.name = name;
 		readFile(path);
+		extractParagraph();
 		extractSentences();
 		extractTokens();
+		extractWords();
+	}
+
+	private void extractWords() {
+		words = tokens.stream().filter(p -> p.matches("[a-z].*")).collect(Collectors.toCollection(ArrayList::new));
 	}
 
 	private void readFile(String path) throws Exception {
-		this.content = new String(Files.readAllBytes(Paths.get(path)));
+		this.content = new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
+		content = content.replaceAll("\n", "");
+	}
+
+	private void extractParagraph() {
+		final String NL = (char) 13 + "";
+		paragraph = new ArrayList<>();
+		for (String para : content.split(NL + NL)) {
+			paragraph.add(para.replaceAll(NL, " "));
+		}
 	}
 
 	private void extractTokens() throws Exception {
@@ -42,6 +61,7 @@ public class Book {
 		TokenizerModel model = new TokenizerModel(is);
 		Tokenizer tokenizer = new TokenizerME(model);
 		tokens = new ArrayList<String>(Arrays.asList(tokenizer.tokenize(content)));
+		tokens = tokens.stream().map(p -> p.toLowerCase()).collect(Collectors.toCollection(ArrayList::new));
 		is.close();
 	}
 
@@ -49,7 +69,9 @@ public class Book {
 		InputStream modelIn = new FileInputStream("en-sent.bin");
 		SentenceModel model = new SentenceModel(modelIn);
 		SentenceDetectorME sentenceDetector = new SentenceDetectorME(model);
-		sentences = new ArrayList<String>(Arrays.asList(sentenceDetector.sentDetect(content)));
+		sentences = new ArrayList<String>();
+		paragraph.stream().forEach(content -> sentences
+				.addAll(new ArrayList<String>(Arrays.asList(sentenceDetector.sentDetect(content)))));
 		if (modelIn != null) {
 			modelIn.close();
 		}
