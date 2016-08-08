@@ -11,25 +11,11 @@ public class Driver {
 	public static void main(String[] args) {
 
 		try {
-
-			Book book1 = new Book("War And Peace", "Leo Tolstoy", "Hamlet.txt");
-			Book book2 = new Book("", "", "Othello.txt");
-			
-			/*Metric sm = new SentenceMetric(book1);
-			Metric pm = new PunctuationMetric(book1);
-
-			System.out.println(sm + "\n SENTENCE Second Metric: " + sm);
-			System.out.println(sm.compare(sm));
-			
-			System.out.println(pm.compare(pm));
-			System.out.println(pm + "\n Second Metric: " + pm);*/
-			
-			Metric wm = new PunctuationMetric(book1);
-			Metric wm2 = new PunctuationMetric(book2);
-			System.out.println(wm);
-			System.out.println(wm2);
-			System.out.println(wm.compare(wm2));
-			
+			Author author = new Author("Shakespeare", WordFrequencyMetric.class);
+			author.addBook(new Book("Hamlet", "Shakespeare", "Hamlet.txt"));
+			author.addBook(new Book("JuliusCaesar", "Shakespeare", "Julius Caesar.txt"));
+			author.addBook(new Book("Macbeth", "Shakespeare", "Macbeth.txt"));
+			author.printAll();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
