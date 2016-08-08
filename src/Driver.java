@@ -16,10 +16,10 @@ public class Driver {
 	public static void main(String[] args) {
 
 		try {
-			Author author = new Author("Leo Tolstoy", WordFrequencyMetric.class);
-			Book book1 = new Book("A Child's Dream of a Star", "Charles Dickens", "ChildsDream.txt");
-			Book book2 = new Book("War And Peace", "Leo Tolstoy", "WarAndPeace.txt");
-			author.addBook(book2);
+			Author author = new Author("Shakespeare", WordFrequencyMetric.class);
+			author.addBook(new Book("Hamlet", "Shakespeare", "Hamlet.txt"));
+			author.addBook(new Book("JuliusCaesar", "Shakespeare", "Julius Caesar.txt"));
+			author.addBook(new Book("Macbeth", "Shakespeare", "Macbeth.txt"));
 			author.printAll();
 		} catch (Exception e) {
 			e.printStackTrace();
