@@ -1,9 +1,9 @@
 public class PunctuationMetric implements Metric {
-       double punctuationDensity = 0;
+	double punctuationDensity = 0;
 
-       public PunctuationMetric(Book book) {
-              calculate(book);
-       }
+	public PunctuationMetric(Book book) {
+		calculate(book);
+	}
 
        @Override
        public void calculate(Book book) {
@@ -19,8 +19,8 @@ public class PunctuationMetric implements Metric {
                            / ((metric.punctuationDensity > punctuationDensity) ? metric.punctuationDensity : punctuationDensity);
        }
 
-       @Override
-       public String toString() {
-              return "Punctuation Density: " + punctuationDensity;
-       }
+	@Override
+	public String toString() {
+		return "Punctuation Density: " + String.format("%.4f", punctuationDensity);
+	}
 }
