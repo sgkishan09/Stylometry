@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class SentenceMetric implements Metric {
 
+	public double THRESHOLD = 0.7;
 	public double avgNoOfWords;
 	public double avgNoOfLetters;
 
@@ -25,7 +26,7 @@ public class SentenceMetric implements Metric {
 	}
 
 	@Override
-	public double compare(Metric metric2) {
+	public double getSimilarity(Metric metric2) {
 		SentenceMetric metric = (SentenceMetric) metric2;
 		double avgWordDiff = Math.abs(avgNoOfWords - metric.avgNoOfWords)
 				/ ((avgNoOfWords > metric.avgNoOfWords) ? avgNoOfWords : metric.avgNoOfWords);
@@ -36,6 +37,11 @@ public class SentenceMetric implements Metric {
 		return percentageMatch;
 	}
 
+	@Override
+	public boolean compare(Metric metric2) {
+		return getSimilarity(metric2) >= THRESHOLD;
+	};
+	
 	@Override
 	public String toString() {
 		return "Sentence Metric : [" + avgNoOfLetters + "\t" + avgNoOfWords + "]";

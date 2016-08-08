@@ -1,6 +1,6 @@
 public class PunctuationMetric implements Metric {
        double punctuationDensity = 0;
-
+       public double THRESHOLD = 0.85;
        public PunctuationMetric(Book book) {
               calculate(book);
        }
@@ -13,10 +13,14 @@ public class PunctuationMetric implements Metric {
        }
 
        @Override
-       public double compare(Metric metric2) {
+       public double getSimilarity(Metric metric2) {
               PunctuationMetric metric = (PunctuationMetric) metric2;
               return 1.0 - (Math.abs(metric.punctuationDensity - punctuationDensity))
                            / ((metric.punctuationDensity > punctuationDensity) ? metric.punctuationDensity : punctuationDensity);
+       }
+       
+       public boolean compare(Metric metric2) {
+    	   return getSimilarity(metric2) >= THRESHOLD;
        }
 
        @Override

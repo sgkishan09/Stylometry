@@ -11,7 +11,8 @@ import java.util.TreeMap;
 import java.util.stream.Stream;
 
 public class WordFrequencyMetric implements Metric {
-	final static int N = 20;
+	public double THRESHOLD = 0.4;
+	final static int N = 500;
 	final static String commonWordsFile = "CommonWords.txt";
 	Set<String> topNWords = new HashSet<String>();
 	Set<String> commonWords;
@@ -66,11 +67,18 @@ public class WordFrequencyMetric implements Metric {
 	}
 
 	@Override
-	public double compare(Metric metric2) {
+	public double getSimilarity(Metric metric2) {
 		Set<String> topNWords = this.topNWords;
 		topNWords.retainAll(((WordFrequencyMetric) metric2).topNWords);
-		return topNWords.size() / N;
+		return (double)topNWords.size() / N;
 	}
+	
+	@Override
+	public boolean compare(Metric metric2) {
+		return getSimilarity(metric2) >= THRESHOLD;
+	}
+	
+	
 
 	public String toString() {
 		return "Word Frequency Metric : " + topNWords;
