@@ -15,7 +15,7 @@ import entities.Book;
 
 public class WordFrequencyMetric implements Metric {
 	public double THRESHOLD = 0.4;
-	final static int N = 500;
+	final static int N = 1000;
 	final static String commonWordsFile = "CommonWords.txt";
 	Set<String> topNWords = new HashSet<String>();
 	Set<String> commonWords;

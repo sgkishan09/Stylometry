@@ -1,4 +1,5 @@
 package metrics;
+
 import entities.Book;
 
 public class GodFather implements Metric {
@@ -45,7 +46,8 @@ public class GodFather implements Metric {
 
 	@Override
 	public double getSimilarity(Metric metric2) {
-		return 0;
+		return (wordFrequency.getSimilarity(metric2) + sentence.getSimilarity(metric2)
+				+ punctuation.getSimilarity(metric2)) / 3;
 	}
 
 }
