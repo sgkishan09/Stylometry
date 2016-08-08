@@ -4,22 +4,36 @@ import java.util.*;
 public class Book {
 	String author;
 	String name;
-	ArrayList<String> lines;
+	String content;
+	ArrayList<String> tokens;
+	ArrayList<String> sentences;
 
 	public Book() {
 		author = "";
 		name = "";
-		lines = new ArrayList<>();
+		content = "";
 	}
 
 	public Book(String name, String author, String path) throws Exception {
 		this.author = author;
 		this.name = name;
-		this.lines = Util.readFile(path);
+		readFile(path);
+	}
+
+	private void readFile(String path) {
+		// read Content from file;
+	}
+
+	private void extractTokens() {
+
+	}
+
+	private void extractSentences() {
+
 	}
 
 	public String toString() {
-		String out = author + "\t" + name + "\t" + lines.size();
+		String out = author + "\t" + name + "\t" + content.length();
 		return out;
 	}
 }
