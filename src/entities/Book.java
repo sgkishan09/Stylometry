@@ -1,3 +1,5 @@
+package entities;
+
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -18,9 +20,9 @@ public class Book {
 	String name;
 	String content;
 	ArrayList<String> paragraph;
-	ArrayList<String> tokens;
-	ArrayList<String> sentences;
-	ArrayList<String> words;
+	public ArrayList<String> tokens;
+	public ArrayList<String> sentences;
+	public ArrayList<String> words;
 
 	public Book() {
 		author = "";

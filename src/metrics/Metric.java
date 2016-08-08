@@ -1,3 +1,5 @@
+package metrics;
+import entities.Book;
 
 public interface Metric {
 

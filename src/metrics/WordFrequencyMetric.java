@@ -1,3 +1,4 @@
+package metrics;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -9,6 +10,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.stream.Stream;
+
+import entities.Book;
 
 public class WordFrequencyMetric implements Metric {
 	public double THRESHOLD = 0.4;
