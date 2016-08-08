@@ -1,5 +1,7 @@
 package metrics;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import entities.Book;
 
@@ -8,17 +10,41 @@ public class SentenceMetric implements Metric {
 	public double THRESHOLD = 0.7;
 	public double avgNoOfWords;
 	public double avgNoOfLetters;
+	private Book book;
+	private int totalNoOfWords = 0;
+	private int totalNoOfLetters = 0;
 
-	public SentenceMetric(Book book) {
+	public SentenceMetric(Book book) throws Exception {
 		calculate(book);
+		this.book = book;
+		addTotalNoOfWords();
+	}
+	
+	public double getLettersPerWord() {
+		return (double)totalNoOfLetters / totalNoOfWords;
+	}
+	
+	public void addTotalNoOfLetters(List<String> words) {
+		for(String word : words) {
+			totalNoOfLetters += word.length();
+		}
+	}
+	
+	public void addTotalNoOfWords() throws Exception {
+		for(String sentence : this.book.sentences) {
+			totalNoOfWords += sentence.split(" ").length;
+			addTotalNoOfLetters(Arrays.asList((sentence.split(" "))));
+		}
+	}	
+	
+	public double getWordsPerSentence() {
+		return (double)totalNoOfWords / this.book.sentences.size();
 	}
 	
 	@Override
 	public void calculate(Book book) {
 		double totalNoOfWords = 0, totalNoOfLetters = 0;
-
 		ArrayList<String> sentences = book.sentences;
-
 		for (String sentence : sentences) {
 			totalNoOfWords += sentence.split(" ").length;
 			totalNoOfLetters += sentence.length();
