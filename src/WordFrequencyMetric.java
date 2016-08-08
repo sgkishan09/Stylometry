@@ -21,11 +21,10 @@ public class WordFrequencyMetric implements Metric {
 		calculate(book);
 	}
 
-	public void readFile() {
+	private void readFile() {
 		try {
 			commonWords = new HashSet<String>(Files.readAllLines(Paths.get(commonWordsFile)));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
