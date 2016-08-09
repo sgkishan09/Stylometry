@@ -1,4 +1,5 @@
 package metrics;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -14,33 +15,33 @@ public class SentenceMetric implements Metric {
 	private int totalNoOfWords = 0;
 	private int totalNoOfLetters = 0;
 
-	public SentenceMetric(Book book) throws Exception {
+	public SentenceMetric(Book book) {
 		calculate(book);
 		this.book = book;
 		addTotalNoOfWords();
 	}
-	
+
 	public double getLettersPerWord() {
-		return (double)totalNoOfLetters / totalNoOfWords;
+		return (double) totalNoOfLetters / totalNoOfWords;
 	}
-	
+
 	public void addTotalNoOfLetters(List<String> words) {
-		for(String word : words) {
+		for (String word : words) {
 			totalNoOfLetters += word.length();
 		}
 	}
-	
-	public void addTotalNoOfWords() throws Exception {
-		for(String sentence : this.book.sentences) {
+
+	public void addTotalNoOfWords() {
+		for (String sentence : this.book.sentences) {
 			totalNoOfWords += sentence.split(" ").length;
 			addTotalNoOfLetters(Arrays.asList((sentence.split(" "))));
 		}
-	}	
-	
-	public double getWordsPerSentence() {
-		return (double)totalNoOfWords / this.book.sentences.size();
 	}
-	
+
+	public double getWordsPerSentence() {
+		return (double) totalNoOfWords / this.book.sentences.size();
+	}
+
 	@Override
 	public void calculate(Book book) {
 		double totalNoOfWords = 0, totalNoOfLetters = 0;
@@ -70,7 +71,7 @@ public class SentenceMetric implements Metric {
 	public boolean compare(Metric metric2) {
 		return getSimilarity(metric2) >= THRESHOLD;
 	};
-	
+
 	@Override
 	public String toString() {
 		return "Sentence Metric : [" + avgNoOfLetters + "\t" + avgNoOfWords + "]";
