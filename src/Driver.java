@@ -28,6 +28,9 @@ public class Driver {
 		return addToMap(startingWords);
 	}
 
+	public static HashMap<String, Integer> startSentence(List<String> sentences) {
+		return addToMap(sentences.stream().map(p -> p.split(" ")[0]).collect(Collectors.toList()));
+	}
 	public static void main(String[] args) {
 		try {
 			/*
@@ -37,11 +40,13 @@ public class Driver {
 			 * "Shakespeare", "Julius Caesar.txt")); author.addBook(new
 			 * Book("Macbeth", "Shakespeare", "Macbeth.txt"));
 			 */
-			Book book = new Book("War and Peace", "Tolstoy", "WarAndPeace.txt");
+			Book book = new Book("War and Peace", "Tolstoy", "Othello.txt");
+			SentenceMetric metric=new SentenceMetric(book);
+			System.out.println(metric.getWordsPerSentence());
 			NGramGenerator generator = new NGramGenerator();
 			List<String> words = NGramGenerator.generate(book.words, 1, " ");
 			List<String> bigrams = NGramGenerator.generate(book.words, 2, " ");
-			System.out.println(frequency(bigrams, "child"));
+			System.out.println(startSentence(book.sentences));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
